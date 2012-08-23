@@ -1,0 +1,13 @@
+default["d7"]["directory"] = "drupal7"
+default["d7"]["site"] = "d7mig.usao.dev"
+default["d7"]["account_name"] = "vagrant"
+default["d7"]["account_pass"] = "vagrant"
+default["d7"]["site_name"] = "University of Science and Arts of Oklahoma"
+default["d7"]["account_mail"] = "webmaster@usao.edu"
+
+default["clean"]["directory"] = "clean"
+default["clean"]["site"] = "clean.usao.dev"
+default["clean"]["account_name"] = "vagrant"
+default["clean"]["account_pass"] = "vagrant"
+default["clean"]["site_name"] = "Clean Is Awesome!!"
+default["clean"]["account_mail"] = "webmaster@usao.edu"
