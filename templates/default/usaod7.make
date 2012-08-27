@@ -95,10 +95,10 @@ projects[usao_courses_node][version] = "1.0"
 projects[usao_courses_node][subdir] = custom
 
 projects[usao_catalog_node][download][type] = "git"
-projects[usao_courses_catalog_nodedownload][url] = "git@bitbucket.org:cdracars/usao-catalog-node.git"
-projects[usao_courses_catalog_nodetype] = "module"
-projects[usao_courses_catalog_nodeversion] = "1.0"
-projects[usao_courses_catalog_nodesubdir] = custom
+projects[usao_catalog_node][download][url] = "git@bitbucket.org:cdracars/usao-catalog-node.git"
+projects[usao_catalog_node][type] = "module"
+projects[usao_catalog_node][version] = "1.0"
+projects[usao_catalog_node][subdir] = custom
 
 ; Themes
 ; --------
