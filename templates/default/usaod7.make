@@ -41,6 +41,9 @@ projects[migrate_extras][subdir] = contrib
 projects[office_hours][version] = "1.0"
 projects[office_hours][subdir] = contrib
 
+projects[workflow][version] = "1.0"
+projects[workflow][subdir] = contrib
+
 projects[entity][version] = "1.0-rc3"
 projects[entity][subdir] = contrib
 
@@ -77,9 +80,6 @@ projects[references][subdir] = contrib
 projects[revisioning][version] = "1.0"
 projects[revisioning][subdir] = contrib
 
-projects[ers][version] = "1.0-beta1"
-projects[ers][subdir] = contrib
-
 ; Custom Modules
 : --------
 projects[migrate_usaod6][download][type] = "git"
@@ -88,11 +88,17 @@ projects[migrate_usaod6][type] = "module"
 projects[migrate_usaod6][version] = "1.0"
 projects[migrate_usaod6][subdir] = custom
 
-projects[usao_courses][download][type] = "git"
-projects[usao_courses][download][url] = "git@bitbucket.org:cdracars/usao-courses.git"
-projects[usao_courses][type] = "module"
-projects[usao_courses][version] = "1.0"
-projects[usao_courses][subdir] = custom
+projects[usao_courses_node][download][type] = "git"
+projects[usao_courses_node][download][url] = "git@bitbucket.org:cdracars/usao-courses-node.git"
+projects[usao_courses_node][type] = "module"
+projects[usao_courses_node][version] = "1.0"
+projects[usao_courses_node][subdir] = custom
+
+projects[usao_catalog_node][download][type] = "git"
+projects[usao_courses_catalog_nodedownload][url] = "git@bitbucket.org:cdracars/usao-catalog-node.git"
+projects[usao_courses_catalog_nodetype] = "module"
+projects[usao_courses_catalog_nodeversion] = "1.0"
+projects[usao_courses_catalog_nodesubdir] = custom
 
 ; Themes
 ; --------
