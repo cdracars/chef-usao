@@ -77,6 +77,9 @@ projects[memcache][subdir] = contrib
 projects[references][version] = "2.0"
 projects[references][subdir] = contrib
 
+projects[strongarm][version] = "2.0"
+projects[strongarm][subdir] = contrib
+
 projects[revisioning][version] = "1.0"
 projects[revisioning][subdir] = contrib
 
