@@ -169,7 +169,7 @@
 
   execute "download-drupal-7-modules" do
     cwd "/var/www/#{ node[:d7][:directory] }/sites/#{ node[:d7][:site] }"
-    command "drush make -y --no-core --working-copy --contrib-destination=. /var/www/#{ node[:d7][:directory] }/usaod7.make"
+    command "drush make -y --no-core --working-copy --no-gitinfofile --contrib-destination=. /var/www/#{ node[:d7][:directory] }/usaod7.make"
     not_if do
       File.exists?("/var/www/#{ node[:d7][:directory] }/sites/#{ node[:d7][:site] }/modules")
     end
