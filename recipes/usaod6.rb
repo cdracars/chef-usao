@@ -31,14 +31,14 @@
   end
 
   template "/var/www/drupal6/usaod6.make" do
-    source "usaod6.make"
+    source "usaod6.make.erb"
     owner "root"
     group "www-data"
     mode 0440
   end
 
   template "/var/www/drupal6/usaod6core.make" do
-    source "usaod6core.make"
+    source "usaod6core.make.erb"
     owner "root"
     group "www-data"
     mode 0440
@@ -81,16 +81,16 @@
 
   # Add an admin user to mysql
   execute "add-mysql-admin-user" do
-    command "/usr/bin/mysql -u root -p#{node[:mysql][:server_root_password]} -e \"" +
-        "GRANT ALL PRIVILEGES ON *.* TO 'usao'@'localhost' IDENTIFIED BY '#{node[:mysql][:server_root_password]}' WITH GRANT OPTION;" +
-        "GRANT ALL PRIVILEGES ON *.* TO 'usao'@'%' IDENTIFIED BY '#{node[:mysql][:server_root_password]}' WITH GRANT OPTION;\" " +
+    command "/usr/bin/mysql -u root -p#{node['mysql']['server_root_password']} -e \"" +
+        "GRANT ALL PRIVILEGES ON *.* TO 'usao'@'localhost' IDENTIFIED BY '#{node['mysql']['server_root_password']}' WITH GRANT OPTION;" +
+        "GRANT ALL PRIVILEGES ON *.* TO 'usao'@'%' IDENTIFIED BY '#{node['mysql']['server_root_password']}' WITH GRANT OPTION;\" " +
         "mysql"
     action :run
   end
 
   # create a drupal db
   execute "add-drupal-db" do
-    command "/usr/bin/mysql -u root -p#{node[:mysql][:server_root_password]} -e \"" +
+    command "/usr/bin/mysql -u root -p#{node['mysql']['server_root_password']} -e \"" +
         "CREATE DATABASE usaoedu;\""
     action :run
     ignore_failure true
@@ -107,7 +107,7 @@
           SET FOREIGN_KEY_CHECKS = 1; \
           COMMIT; \
           SET AUTOCOMMIT = 1;' > ~/usaoedu.sql
-          mysql -u root -p#{node[:mysql][:server_root_password]} usaoedu < ~/usaoedu.sql;
+          mysql -u root -p#{node['mysql']['server_root_password']} usaoedu < ~/usaoedu.sql;
         else
           echo "File 1 is older than file 2";
       fi;
@@ -183,10 +183,10 @@
       action :run
   end
 
-  include_recipe "apache"
+  include_recipe "apache2"
 
   web_app "usaod6" do
-    server_name node[:fqdn]
-    server_aliases [node[:hostname], " d6mig.usao.dev"]
+    server_name node['fqdn']
+    server_aliases [node['hostname'], " d6mig.usao.dev"]
     docroot "/var/www/drupal6"
   end

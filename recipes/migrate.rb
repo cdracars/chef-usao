@@ -11,7 +11,7 @@
 
   # create a drupal db
   execute "add-drupal-6-db" do
-    command "/usr/bin/mysql -u root -p#{node[:mysql][:server_root_password]} -e \"" +
+    command "/usr/bin/mysql -u root -p#{node['mysql']['server_root_password']} -e \"" +
         "CREATE DATABASE usaoedu;\""
     action :run
     ignore_failure true
@@ -19,14 +19,14 @@
 
   # import the data into the new database
   execute "create-d6-migration-database" do
-    command "mysql -u root -p#{node[:mysql][:server_root_password]} usaoedu < /var/migration_data/usaoedu.sql"
+    command "mysql -u root -p#{node['mysql']['server_root_password']} usaoedu < /var/migration_data/usaoedu.sql"
     not_if do
       File.exists?("/var/lib/mysql/usaoedu/users.frm")
     end
   end
 
   execute "cleanup-drupal-6-users-data" do
-    command "mysql -uroot -p#{node[:mysql][:server_root_password]} -e 'DELETE FROM usaoedu.role WHERE rid = 3'"
+    command "mysql -uroot -p#{node['mysql']['server_root_password']} -e 'DELETE FROM usaoedu.role WHERE rid = 3'"
   end
 
   execute "migrate-drupal-6-users" do

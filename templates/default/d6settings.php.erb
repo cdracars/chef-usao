@@ -88,7 +88,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysql://root:<%= node[:mysql][:server_root_password] %>@localhost/usaoedu';
+$db_url = 'mysql://root:<%= node['mysql']['server_root_password'] %>@localhost/usaoedu';
 $db_prefix = '';
 
 /**

@@ -8,7 +8,7 @@
 #
 
   execute "download-drupal-7-modules" do
-    cwd "#{ node['drupal']['dir'] }"
+    cwd "#{ node['drupal']['dir'] }/"
     command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu/master/d7_usao_edu.build"
     not_if do
       File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/contrib")
@@ -28,4 +28,10 @@
     not_if do
       File.exists?("/var/lib/mysql/#{ node['drupal']['db']['database'] }/ctools_css_cache.frm")
     end
+  end
+
+  execute "rebuild-permissions" do
+    cwd "#{ node['drupal']['dir'] }/sites/default"
+    command "drush php-eval 'node_access_rebuild();'"
+    ignore_failure true
   end
