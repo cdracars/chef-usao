@@ -9,7 +9,7 @@
 
   execute "download-drupal-7-modules" do
     cwd "#{ node['drupal']['dir'] }/"
-    command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu/master/d7_usao_edu.build"
+    command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build"
     not_if do
       File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/contrib")
     end
