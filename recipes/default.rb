@@ -7,15 +7,15 @@
 # All rights reserved - Do Not Redistribute
 #
 
-  execute "download-drupal-7-modules" do
+  execute "usao-site-drush-make-download-modules" do
     cwd "#{ node['drupal']['dir'] }/"
-    command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build"
+    command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build; touch #{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt"
     not_if do
-      File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/contrib")
+      File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt")
     end
   end
 
-  execute "install-drupal-7" do
+  execute "usao-site-install-drupal-7" do
     cwd "#{ node['drupal']['dir'] }/sites/default"
     command "drush site-install -y \
     d7_usao_edu \
@@ -30,8 +30,17 @@
     end
   end
 
-  execute "rebuild-permissions" do
+  execute "usao-site-rebuild-permissions" do
     cwd "#{ node['drupal']['dir'] }/sites/default"
     command "drush php-eval 'node_access_rebuild();'"
     ignore_failure true
+    not_if { node.attribute?("usao-site-permission-rebuilt") }
+  end
+
+  ruby_block "usao-site-permissions-rebuilt" do
+    block do
+      node.set['usao-site-permission-rebuilt'] = true
+      node.save
+    end
+    action :nothing
   end
