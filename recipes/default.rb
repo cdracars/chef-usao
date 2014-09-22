@@ -9,10 +9,13 @@
 
   bash "usao-site-drush-make-download-modules" do
     cwd "#{ node['drupal']['dir'] }/"
-    command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build; touch #{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt"
-    not_if do
-      File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt")
-    end
+    command "drush make -y \
+             --no-core \
+             --working-copy \
+             --no-gitinfofile \
+             https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build;
+             touch #{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt"
+    not_if { ::File.exists?("#{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt") }
   end
 
   bash "usao-site-install-drupal-7" do
@@ -25,9 +28,7 @@
     --account-pass=#{ node['usao']['account_pass'] } \
     --account-mail='#{ node['usao']['account_mail'] }' \
     --db-url=mysql://#{ node['drupal']['db']['user'] }:#{ node['drupal']['db']['password'] }@localhost/#{ node['drupal']['db']['database'] }"
-    not_if do
-      File.exists?("/var/lib/mysql/#{ node['drupal']['db']['database'] }/ctools_css_cache.frm")
-    end
+    not_if { ::File.exists?("/var/lib/mysql/#{ node['drupal']['db']['database'] }/ctools_css_cache.frm") }
   end
 
   execute "usao-site-rebuild-permissions" do
