@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-  execute "usao-site-drush-make-download-modules" do
+  bash "usao-site-drush-make-download-modules" do
     cwd "#{ node['drupal']['dir'] }/"
     command "drush make -y --no-core --working-copy --no-gitinfofile https://raw.github.com/cdracars/d7.usao.edu_build/master/d7_usao_edu.build; touch #{ node['drupal']['dir'] }/profiles/d7_usao_edu/modules/delete_to_update.txt"
     not_if do
@@ -15,7 +15,7 @@
     end
   end
 
-  execute "usao-site-install-drupal-7" do
+  bash "usao-site-install-drupal-7" do
     cwd "#{ node['drupal']['dir'] }/sites/default"
     command "drush site-install -y \
     d7_usao_edu \
