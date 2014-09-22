@@ -7,6 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
+include_recipe 'drupal'
+
   bash "usao-site-drush-make-download-modules" do
     cwd "#{ node['drupal']['dir'] }/"
     command "drush make -y \
