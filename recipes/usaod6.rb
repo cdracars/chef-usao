@@ -183,8 +183,6 @@
       action :run
   end
 
-  include_recipe "apache2"
-
   web_app "usaod6" do
     server_name node['fqdn']
     server_aliases [node['hostname'], " d6mig.usao.dev"]
