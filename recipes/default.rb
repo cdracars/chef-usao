@@ -29,7 +29,7 @@ include_recipe 'drupal'
     --account-name=#{ node['usao']['account_name'] } \
     --account-pass=#{ node['usao']['account_pass'] } \
     --account-mail='#{ node['usao']['account_mail'] }' \
-    --db-url=mysql://#{ node['drupal']['db']['user'] }:#{ node['drupal']['db']['password'] }@localhost/#{ node['drupal']['db']['database'] }"
+    --db-url=mysql://#{mysql_connection_info[:username]}:#{mysql_connection_info[:password]}@localhost/#{site[:drupal][:settings][:db_name]}"
     not_if { ::File.exists?("/var/lib/mysql/#{ node['drupal']['db']['database'] }/ctools_css_cache.frm") }
   end
 
