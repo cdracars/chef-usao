@@ -6,3 +6,5 @@ rvm:
 script:
   - bundle exec rake knife
   - bundle exec rake foodcritic
+notifications:
+  irc: irc.freenode.org#cdracars
